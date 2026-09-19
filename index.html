@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Galaxy Happy Birthday 3D</title>
+  <meta name="author" content="Isaac Daniel Cotera">
+  <meta name="description" content="Interactive 3D birthday gift built with Three.js and GSAP: a real-time galaxy that transitions through photos, messages and music.">
+  <meta property="og:title" content="Galaxy Happy Birthday 3D">
+  <meta property="og:description" content="An interactive 3D space journey through photos and messages — a personalized birthday gift.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cotera2024.github.io/Happy-Birthday-Galaxy--main/">
+  <meta name="twitter:card" content="summary">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<!-- Este overlay bloquea la pagina hasta que las texturas estan en memoria Si la libreria  arranca a mover la camara con gsap mientras las fotos
+     aun se estan cargando la animacion va a tirones y lag 
+     Con la pantalla de carga nos aseguramos de que cuando arranque el viaje
+     todo este  estable. -->
+<div id="loading-overlay">
+  <div class="loader-indicator"></div>
+  <div class="loader-message">Loading universe...</div>
+  <div class="loader-progress-bar">
+    <div class="loader-progress-fill" id="loader-fill"></div>
+  </div>
+  
+  <div class="btn-wrap" id="start-btn-container" style="display: none;">
+    <button id="start-btn">
+      <span class="shine"></span>
+      <span class="face"></span>
+      <span class="core">
+        <span class="star star--dot"></span>
+        <span class="star star--dot"></span>
+        <span class="star star--dot"></span>
+        <span class="star star--dot"></span>
+      </span>
+      <span class="orbit">
+        <span class="ring">
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+        </span>
+      </span>
+      <span class="text">Explore</span>
+    </button>
+  </div>
+
+</div>
+
+<div id="canvas-container"></div>
+
+<div id="text-overlay">
+  <h1 id="text-title"></h1>
+  <p id="text-sub"></p>
+</div>
+
+<div id="photo-text">
+  <span class="idx" id="photo-index"></span>
+  <p id="photo-text-content"></p>
+</div>
+
+<div id="final-title" class="pop">
+  <h1>HAPPY BIRTHDAY ryann!</h1>
+  <span class="tag">To many more light-years together</span>
+</div>
+
+<div id="end-title" class="pop">
+  <h1>MADE WITH LOVE</h1>
+</div>
+
+<div id="error-overlay" hidden>
+  <p>Hardware rendering is unsupported.</p>
+  <span>A WebGL-compatible environment is required.</span>
+</div>
+
+<div id="vignette-overlay"></div>
+
+<!-- La musica la cargo en .m4a para los navegadores de apple ya q no soportan .ogg y en .ogg para
+     los demas navegadores  de escritorio y moviles es decir  Si le paso a safari por ejemplo un formato que no maneja
+     bien la decodifica al vuelo se come la cpu y te quedas mudo. cada uno
+     entra con su codec nativo. -->
+<audio id="ambient-audio" preload="auto" loop>
+  <source src="music/galaxi.m4a" type="audio/mp4" />
+  <source src="music/galaxi.ogg" type="audio/ogg" />
+</audio>
+<audio id="event-audio" preload="none">
+  <source src="music/happy.m4a" type="audio/mp4" />
+  <source src="music/happy.ogg" type="audio/ogg" />
+</audio>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
